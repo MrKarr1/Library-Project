@@ -11,6 +11,7 @@
         </div>
 		<div class="tags">
 			{% for tag in tags %}
+			{# loop sur tag pour afficher les books #}
 				<div class="tag">
 					<a href="{{ path('app_tag', {'id': tag.id}) }}"><h1 class="tag-name">{{ tag.name }}</h1></a>
 					<div class="books">

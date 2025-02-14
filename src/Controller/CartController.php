@@ -15,6 +15,7 @@ final class CartController extends AbstractController
     #[Route('/add', name: 'app_cart_add', methods: ['POST'])]
     public function add(Request $request, SessionInterface $session, BookRepository $bookRepo): Response
     {
+        // methode pour ajouter un livre au panier
         $bookId = $request->request->get('id');
         $cart = $session->get('cart') ?? [];
         if (count($cart) < 5) {

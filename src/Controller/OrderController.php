@@ -20,6 +20,7 @@ final class OrderController extends AbstractController
     #[Route('/book', name: 'app_order_book', methods: ['POST'])]
     public function book(Request $request, BookRepository $bookRepo, EntityManagerInterface $entityManager): Response
     {
+        // methode pour ajouter un livre à la table order
         if ($this->getUser()) {
             $order = new Order();
             $order->setDate(new DateTimeImmutable('now', new DateTimeZone('Europe/Paris')));
@@ -37,6 +38,7 @@ final class OrderController extends AbstractController
     #[Route('/cart', name: 'app_order_cart', methods: ['POST'])]
     public function cart(SessionInterface $session, BookRepository $bookRepo, EntityManagerInterface $entityManager): Response
     {
+        // methode pour ajouter un panier à la table order
         $cart = $session->get('cart') ?? [];
         if ($this->getUser() && $cart !== []) {
             $order = new Order();

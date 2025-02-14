@@ -16,16 +16,15 @@
             {{ form_widget(form.summary) }}
 
             {{ form_label(form.cover) }}
-                {% if book.cover %}
-                    <img class="img-edit" src="{{ asset('imgs/uploads/' ~ book.cover) }}" alt="{{ book.name }}">
-                {% else %}
-                    <img class="img-edit" src="{{ asset('imgs/err.jpg') }}" alt="error-img">
-                {% endif %}
+            {% if book.cover %}
+                <img class="img-edit" src="{{ asset('imgs/uploads/' ~ book.cover) }}" alt="{{ book.name }}">
+            {% else %}
+                <img class="img-edit" src="{{ asset('imgs/err.jpg') }}" alt="error-img">
+            {% endif %}
             {{ form_widget(form.cover) }}
-            
+
             {{ form_label(form.tags) }}
             {{ form_widget(form.tags) }}
-
                 <button class="action"><span>Modifier</span></button>
         {{ form_end(form) }}   
     </div>

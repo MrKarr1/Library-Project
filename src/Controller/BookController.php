@@ -22,12 +22,14 @@ final class BookController extends AbstractController
     {
         return JsonResponse::fromJsonString($serializer->serialize($bookRepo->findAll(), 'json', ['groups' => ['book:read']]));
     }
+    
 
     // http://localhost:8000/book/api
 
     #[Route('/new', name: 'app_book_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
+        // methode pour ajouter un livre
         if (!$this->isGranted('ROLE_ADMIN')) return $this->redirectToRoute('app_home');
         $book = new Book();
         $form = $this->createForm(BookType::class, $book);
@@ -67,6 +69,7 @@ final class BookController extends AbstractController
     #[Route('/{id}', name: 'app_book_delete', methods: ['POST'])]
     public function delete(Request $request, Book $book, EntityManagerInterface $entityManager): Response
     {
+        // methode pour supprimer un livre
         if ($this->isCsrfTokenValid('delete' . $book->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($book);
             $entityManager->flush();
@@ -85,7 +88,9 @@ final class BookController extends AbstractController
     #[Route('/{id}/edit', name: 'app_book_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Book $book, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
+        // methode pour modifier un livre 
         if (!$this->isGranted('ROLE_ADMIN')) return $this->redirectToRoute('app_home');
+        // pour verifier si l'utilisateur connecté est admin
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
